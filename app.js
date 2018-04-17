@@ -16,10 +16,8 @@ class App extends React.Component {
     this.setState({note: event.target.value});
   }
 
- 
   newNote() {
-   
-    var Mask = 'li_';
+    const Mask = 'li_';
    
     const notes = this.state.notes;
     notes.push(this.state.note);
@@ -27,7 +25,20 @@ class App extends React.Component {
     this.setState({notes: notes});
     this.setState({note: ''});
     nId++;
-    console.log(nId);
+  }
+
+  showNote() {
+    lcLen = localStorage.length;
+    if (lcLen > 0) {
+      for(var i = 0; i < lcLen; i++) {
+        var key = localStorage.key;
+        return React.createElement(
+          'li', 
+          { className: "note"},
+          localStorage.getItem(key)
+        )
+      }
+    }
   }
 
   render() {
@@ -40,9 +51,9 @@ class App extends React.Component {
           </div>
           <ul className="note_list">
 
-            {this.state.notes.map((note) =>
-              <li className="note" value="">{note}</li>
-            )}
+            {/* {this.state.notes.map((note) =>
+              <li className="note">{note}</li>
+            )} */}
 
           </ul>
         </div>
