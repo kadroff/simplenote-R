@@ -1,3 +1,5 @@
+var nId = 0;
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -14,11 +16,18 @@ class App extends React.Component {
     this.setState({note: event.target.value});
   }
 
+ 
   newNote() {
+   
+    var Mask = 'li_';
+   
     const notes = this.state.notes;
     notes.push(this.state.note);
+    localStorage.setItem(Mask+nId, this.state.note);
     this.setState({notes: notes});
     this.setState({note: ''});
+    nId++;
+    console.log(nId);
   }
 
   render() {
@@ -32,7 +41,7 @@ class App extends React.Component {
           <ul className="note_list">
 
             {this.state.notes.map((note) =>
-              <li className="note">{note}</li>
+              <li className="note" value="">{note}</li>
             )}
 
           </ul>
