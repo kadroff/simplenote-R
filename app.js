@@ -1,44 +1,40 @@
-var nId = 0;
-
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      note: '',
-      notes: []
+      notes: [
+        {
+          _id: ID(),
+          content: ''
+        }
+      ],
+      currentIndex: 0
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.newNote = this.newNote.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({note: event.target.value});
+    this.selectNote = this.selectNote.bind(this);
   }
 
   newNote() {
-    const Mask = 'li_';
-   
     const notes = this.state.notes;
-    notes.push(this.state.note);
-    localStorage.setItem(Mask+nId, this.state.note);
+    notes.unshift({
+      _id: ID(),
+      content: ''
+    });
     this.setState({notes: notes});
-    this.setState({note: ''});
-    nId++;
   }
 
-  showNote() {
-    lcLen = localStorage.length;
-    if (lcLen > 0) {
-      for(var i = 0; i < lcLen; i++) {
-        var key = localStorage.key;
-        return React.createElement(
-          'li', 
-          { className: "note"},
-          localStorage.getItem(key)
-        )
-      }
-    }
+  selectNote(event) {
+    const id = event.target.id;
+    const noteIndex = this.state.notes.findIndex(note => note._id === id);
+    this.setState({currentIndex: noteIndex});
+  }
+
+  handleChange(event) {
+    const notes = this.state.notes;
+    notes[this.state.currentIndex].content = event.target.value;
+    this.setState({notes: notes});
   }
 
   render() {
@@ -51,15 +47,15 @@ class App extends React.Component {
           </div>
           <ul className="note_list">
 
-            {/* {this.state.notes.map((note) =>
-              <li className="note">{note}</li>
-            )} */}
+            {this.state.notes.map((note) =>
+              <li className="note" onClick={this.selectNote} id={note._id}>{note.content}</li>
+            )}
 
           </ul>
         </div>
 
         <div className="editor">
-          <textarea onChange={this.handleChange} value={this.state.note}></textarea>
+          <textarea onChange={this.handleChange} value={this.state.notes[this.state.currentIndex].content}></textarea>
         </div>
       </div>
     );
@@ -70,3 +66,7 @@ ReactDOM.render(
   <App />,
   document.getElementById('root')
 );
+
+function ID() {
+  return '_' + Math.random().toString(36).substr(2, 9);
+};
