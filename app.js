@@ -1,3 +1,5 @@
+const date = new Date();
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -5,7 +7,8 @@ class App extends React.Component {
       notes: [
         {
           _id: ID(),
-          content: ''
+          content: '',
+          date: dateNow()
         }
       ],
       currentIndex: 0
@@ -20,7 +23,8 @@ class App extends React.Component {
     const notes = this.state.notes;
     notes.unshift({
       _id: ID(),
-      content: ''
+      content: '',
+      date: dateNow()
     });
     this.setState({notes: notes});
   }
@@ -48,7 +52,7 @@ class App extends React.Component {
           <ul className="note_list">
 
             {this.state.notes.map((note) =>
-              <li className="note" onClick={this.selectNote} id={note._id}>{note.content}</li>
+              <li className="note" onClick={this.selectNote} id={note._id}>{note.content + " " + note.date}</li>
             )}
 
           </ul>
@@ -70,3 +74,8 @@ ReactDOM.render(
 function ID() {
   return '_' + Math.random().toString(36).substr(2, 9);
 };
+
+function dateNow() {
+  const d = new Date();
+  return d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+}
