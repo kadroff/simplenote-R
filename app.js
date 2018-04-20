@@ -1,3 +1,4 @@
+var i = 0;
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -27,6 +28,7 @@ class App extends React.Component {
       date: dateNow()
     });
     this.setState({notes: notes});
+
   }
 
   selectNote(event) {
@@ -43,11 +45,11 @@ class App extends React.Component {
     this.setState({notes: notes});
   }
 
-
   handleChange(event) {
     const notes = this.state.notes;
     notes[this.state.currentIndex].content = event.target.value;
     this.setState({notes: notes});
+    localStorage.setItem(notes[this.state.currentIndex]._id, notes[this.state.currentIndex].content);
   }
 
   findNote() {
@@ -57,6 +59,7 @@ class App extends React.Component {
     this.setState({notes: result});
   }
 
+  
   render() {
     return (
       <div className="app">
