@@ -1,5 +1,3 @@
-const date = new Date();
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -17,6 +15,7 @@ class App extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.newNote = this.newNote.bind(this);
     this.selectNote = this.selectNote.bind(this);
+    this.deleteNote = this.deleteNote.bind(this);
   }
 
   newNote() {
@@ -35,6 +34,15 @@ class App extends React.Component {
     this.setState({currentIndex: noteIndex});
   }
 
+  deleteNote() {
+    const notes = this.state.notes;
+    const index = this.state.currentIndex;
+    notes.splice(index, 1);
+    this.setState({currentIndex: 0});
+    this.setState({notes: notes});
+  }
+
+
   handleChange(event) {
     const notes = this.state.notes;
     notes[this.state.currentIndex].content = event.target.value;
@@ -48,6 +56,7 @@ class App extends React.Component {
           <div className="header">
             <input type="search" placeholder="Найти" />
             <input type="button" onClick={this.newNote} value="Создать+" />
+            <input type="button" onClick={this.deleteNote} value="Удалить" />
           </div>
           <ul className="note_list">
 
