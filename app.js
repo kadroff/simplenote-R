@@ -16,6 +16,7 @@ class App extends React.Component {
     this.newNote = this.newNote.bind(this);
     this.selectNote = this.selectNote.bind(this);
     this.deleteNote = this.deleteNote.bind(this);
+    this.findNote = this.findNote.bind(this);
   }
 
   newNote() {
@@ -49,12 +50,20 @@ class App extends React.Component {
     this.setState({notes: notes});
   }
 
+  findNote() {
+    const notes = this.state.notes;
+    const val = document.getElementById("search").value;
+    const result = notes.filter(note => note.content === val);
+    this.setState({notes: result});
+  }
+
   render() {
     return (
       <div className="app">
         <div className="sidebar">
           <div className="header">
-            <input type="search" placeholder="Найти" />
+            <input type="search" id="search" placeholder="Найти" />
+            <input type="button" onClick={this.findNote} value="Найти" />
             <input type="button" onClick={this.newNote} value="Создать+" />
             <input type="button" onClick={this.deleteNote} value="Удалить" />
           </div>
