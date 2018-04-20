@@ -13,6 +13,18 @@ class App extends React.Component {
       currentIndex: 0
     };
 
+    if (localStorage.length > 0) {
+      for(var i=0; i<localStorage.length; i++) {
+        const notes = this.state.notes;
+        notes.push({
+          _id: ID(),
+          content: localStorage.getItem(i),
+          date: dateNow()
+        })
+        this.setState({notes: notes});
+      }
+    }
+
     this.handleChange = this.handleChange.bind(this);
     this.newNote = this.newNote.bind(this);
     this.selectNote = this.selectNote.bind(this);
@@ -28,6 +40,7 @@ class App extends React.Component {
       date: dateNow()
     });
     this.setState({notes: notes});
+    i++ // наследуется из handleChange
 
   }
 
@@ -49,7 +62,7 @@ class App extends React.Component {
     const notes = this.state.notes;
     notes[this.state.currentIndex].content = event.target.value;
     this.setState({notes: notes});
-    localStorage.setItem(notes[this.state.currentIndex]._id, notes[this.state.currentIndex].content);
+    localStorage.setItem(i, notes[this.state.currentIndex].content); 
   }
 
   findNote() {
