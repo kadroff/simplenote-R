@@ -13,23 +13,16 @@ class App extends React.Component {
       currentIndex: 0
     };
 
-    if (localStorage.length > 0) {
-      for(var i=0; i<localStorage.length; i++) {
-        const notes = this.state.notes;
-        notes.push({
-          _id: ID(),
-          content: localStorage.getItem(i),
-          date: dateNow()
-        })
-        this.setState({notes: notes});
-      }
-    }
-
     this.handleChange = this.handleChange.bind(this);
     this.newNote = this.newNote.bind(this);
     this.selectNote = this.selectNote.bind(this);
     this.deleteNote = this.deleteNote.bind(this);
     this.findNote = this.findNote.bind(this);
+  }
+
+  componentDidMount() {
+    if (localStorage.getItem('notes'))
+    this.setState({notes: JSON.parse(localStorage.getItem('notes'))});
   }
 
   newNote() {
@@ -39,9 +32,9 @@ class App extends React.Component {
       content: '',
       date: dateNow()
     });
+    
+    localStorage.setItem('notes', JSON.stringify(notes));
     this.setState({notes: notes});
-    i++ // наследуется из handleChange
-
   }
 
   selectNote(event) {
@@ -54,6 +47,7 @@ class App extends React.Component {
     const notes = this.state.notes;
     const index = this.state.currentIndex;
     notes.splice(index, 1);
+    localStorage.setItem('notes', JSON.stringify(notes));
     this.setState({currentIndex: 0});
     this.setState({notes: notes});
   }
@@ -62,7 +56,6 @@ class App extends React.Component {
     const notes = this.state.notes;
     notes[this.state.currentIndex].content = event.target.value;
     this.setState({notes: notes});
-    localStorage.setItem(i, notes[this.state.currentIndex].content); 
   }
 
   findNote() {
