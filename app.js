@@ -1,4 +1,3 @@
-var i = 0;
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -65,7 +64,6 @@ class App extends React.Component {
     this.setState({notes: result});
   }
 
-  
   render() {
     return (
       <div className="app">
@@ -92,11 +90,6 @@ class App extends React.Component {
     );
   }
 }
-
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
 
 function ID() {
   return '_' + Math.random().toString(36).substr(2, 9);

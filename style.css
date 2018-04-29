@@ -5,6 +5,20 @@
 html,body {
   height: 100%;
   margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.page h1 {
+  text-align: center;
+}
+
+.page_welcome {
+  padding-top: 100px;
 }
 
 #root {
@@ -54,3 +68,17 @@ html,body {
   outline: none;
   resize: none;
 }
+
+
+/* Signup form */
+
+form {
+  margin: 0 auto;
+  width: 320px;
+}
+
+form input {
+  width: 100%;
+  margin: 10px 0;
+}
+
