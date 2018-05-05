@@ -1,6 +1,6 @@
 const isUserLogin = false;
 
-(function init() {
+function init() {
   const path = window.location.href.split('#')[1];
   let page = null;
 
@@ -26,13 +26,28 @@ const isUserLogin = false;
   window.onhashchange = function() {
     init();
   }
-})();
+};
 
-firebase.auth().onAuthStateChanged(function(user) {
+// Default: Почему-то выполняется сразу вход, *ниже помогает предотвращать это
+  firebase.auth().signOut().then(function() {
+    // Sign-out successful.
+  }).catch(function(error) {
+    // An error happened.
+  });
+
+ firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
-    isUserLogin = true;
     init();
+    ReactDOM.render(
+      <App />,
+      document.getElementById('root')
+    );
   } else {
-    // No user is signed in.
+    console.log("Ошибка");
   }
-});
+  });
+
+ 
+(function() {
+  init();
+})();
