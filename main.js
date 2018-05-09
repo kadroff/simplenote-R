@@ -28,13 +28,13 @@ function init() {
   }
 };
 
-// Default: Почему-то выполняется сразу вход, *ниже помогает предотвращать это
+/* // Default: Почему-то выполняется сразу вход, *ниже помогает предотвращать это
   firebase.auth().signOut().then(function() {
     // Sign-out successful.
   }).catch(function(error) {
     // An error happened.
   });
-
+ */
  firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     init();

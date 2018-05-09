@@ -69,15 +69,20 @@ class App extends React.Component {
       <div className="app">
         <div className="sidebar">
           <div className="header">
-            <input type="search" id="search" placeholder="Найти" />
-            <input type="button" onClick={this.findNote} value="Найти" />
-            <input type="button" onClick={this.newNote} value="Создать+" />
-            <input type="button" onClick={this.deleteNote} value="Удалить" />
+            <div className="search_item">
+              <input type="search" className="search_field" id="search" placeholder="Найти" />
+              <input type="button" className="button_search" onClick={this.findNote} value="Найти" />  
+            </div>
+            <br/>
+            <div className="input_item">
+              <input type="button" className="button_create" onClick={this.newNote} value="Создать+" />
+              <input type="button" className="button_delete" onClick={this.deleteNote} value="Удалить" />
+            </div>
           </div>
           <ul className="note_list">
 
             {this.state.notes.map((note) =>
-              <li className="note" onClick={this.selectNote} id={note._id}>{note.content + " " + note.date}</li>
+              <li className="note" onClick={this.selectNote} id={note._id}>{note.content} <br/> <span>{note.date}</span></li>
             )}
 
           </ul>

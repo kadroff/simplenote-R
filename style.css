@@ -1,5 +1,7 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html,body {
@@ -40,7 +42,6 @@ html,body {
 }
 
 .sidebar .header {
-  display: flex;
   flex-direction: row;
 }
 
@@ -56,6 +57,12 @@ html,body {
   padding-bottom: 30px;
 }
 
+.note span {
+  color: gray;
+  font-size: 16px;
+  padding-top: 20px;
+}
+
 .editor {
   flex: 1;
   display: flex;
@@ -68,6 +75,50 @@ html,body {
   outline: none;
   resize: none;
 }
+
+/* Header section */
+
+.header {
+  height: 110px;
+  border-bottom: 1px solid #eee;
+}
+
+.header input[type="button"] {
+  height: 40px;
+  width: 30px;
+  cursor: pointer;
+  border: none;
+}
+
+.search_item {
+  display: flex;
+}
+
+.button_search {
+  background-color: #3498db;
+  flex-grow: 1;
+}
+
+.search_field {
+  flex-grow: 4;
+}
+
+.input_item {
+  margin-top: -20px;
+  display: flex;
+}
+
+.button_delete {
+  border: none;
+  background-color: #e43;
+  flex-grow: 1;
+}
+
+.button_create {
+  flex-grow: 1;
+  background-color: #2ecc71;
+}
+
 
 
 /* Signup form */
