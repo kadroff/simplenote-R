@@ -58,8 +58,8 @@ class App extends React.Component {
   }
 
   findNote() {
-    const notes = this.state.notes;
     const val = document.getElementById("search").value;
+    const notes = this.state.notes;
     const result = notes.filter(note => note.content === val);
     this.setState({notes: result});
   }

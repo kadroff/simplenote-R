@@ -32,20 +32,22 @@ class Login extends React.Component{
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <h1>Log In</h1>
-        <label>
-          Email:
-          <input type="email" value={this.state.email} onChange={this.handleInputChange} name="email" />
-        </label>
-        <br/>
-        <label>
-          Password:
-          <input type="password" value={this.state.password} onChange={this.handleInputChange} name="password" />
-        </label>
-        <br/>
-          <input type="submit" value="Войти" />
-      </form>
+      <div class="login_form">
+        <form onSubmit={this.handleSubmit}>
+          <h1>Log In</h1>
+          <label>
+            Email:
+            <input type="email" placeholder="test@gmail.com" value={this.state.email} onChange={this.handleInputChange} name="email" />
+          </label>
+          <br/>
+          <label>
+            Password:
+            <input type="password" placeholder="Minimum 6 character" value={this.state.password} onChange={this.handleInputChange} name="password" />
+          </label>
+          <br/>
+            <input type="submit" value="Войти" />
+        </form>
+      </div>
     )
   }
 }
